@@ -1,0 +1,35 @@
+create sequence post_seq start with 1 increment by 50
+
+create sequence user_details_seq start with 1 increment by 50
+
+create table post 
+(id integer not null, user_id integer, description varchar(255), primary key (id))
+
+create table user_details 
+(birth_date date, id integer not null, name varchar(255), primary key (id))
+
+Spring Security
+Whenever you send a request, Spring Security intercepts that request. So for example, if I'm sending a request to 
+localhost:8080/users, Spring Security would intercept this request, and it will execute a series of filters.
+
+These series of filters are called FilterChains. There are a series of checks that are done in your FilterChains.
+
+1) All requests should be authenticated. So they should be credentials that are attached with all the requests.
+2) And if a request is not authenticated. If a request does not have credentials, or is not authenticated, then by 
+   default a webpage is shown.
+3) One of the things that is done as part of FilterChain is to enable a check for something called CSRF. And this 
+   would impact our POST and PUT requests. And there are a lot of other things that are done as part of the 
+   FilterChain.
+
+What we want to do now, is we would want to customize the FilterChain. There are two things that we would want to
+modify in the existing FilterChain.
+
+1) Showing a sign-in page is really good for web applications. However for Rest API, we would want to use something 
+called HTTP basic authentication.
+
+And when we are making use of HTTP authentication, what happens is typically when I type in local host users, a 
+pop-up needs to come up and ask for user credentials. That's one thing, we would want to change in the FilterChain.
+
+2) To disable CSRF, so that we can send POST requests. In Spring Security, if we would actually want to override 
+the existing FilterChain, then we would need to define the entire chain again. We will create a Bean, where we 
+would define a FilterChain.
