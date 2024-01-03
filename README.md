@@ -12,6 +12,8 @@ Follow these instructions to get a copy of the project up and running on your lo
 - [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html) - version 17 or later
 - [Maven](https://maven.apache.org/download.cgi) - for building and managing the project dependencies
 - Ensure Spring Boot version is 3.1 or higher
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [MySQL Shell](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install-windows-quick.html)
 
 ### Installing
 
@@ -63,12 +65,12 @@ The API will be accessible at `http://localhost:8080`.
 
 ### Get a specific user
 
-- **Endpoint**: `/users/{itemId}`
+- **Endpoint**: `/users/{Id}`
 - **HTTP Method**: `GET`
 
 ### Delete an item
 
-- **Endpoint**: `/users/{itemId}`
+- **Endpoint**: `/users/{Id}`
 - **HTTP Method**: `DELETE`
 
 ## Technologies Used
