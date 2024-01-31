@@ -20,13 +20,16 @@ public class HelloWorldController {
 	
 	// @RequestMapping(method = RequestMethod.GET, path = "/hello-world")
 	
+	// Returns a string on the url
 	@GetMapping(path = "/hello-world")
 	public String helloWorld() {
 		return "Hello World";
 	}
 	
+	// Returns a JSON response on the url
 	@GetMapping(path = "/hello-world-bean")
 	public HelloWorldBean helloWorldBean() {
+		// Returning an instance of the HelloWorldBean class
 		return new HelloWorldBean("Hello World");
 	}
 	
@@ -34,10 +37,10 @@ public class HelloWorldController {
 	// /users/{id}/todos/{id} => /users/2/todos/200
 	// /hello-world/path-variable/{name}
 	
-	/* So what happens is when I type in hello-world/path-variable/Ranga, this Ranga over here would 
-	 * be mapped by Spring MVC to the name in here, because of the @PathVariable annotation which helps
-	 * to capture the values of path parameters. Path parameters are nothing but the variable values in 
-	 * your URLs. */
+	/* So what happens is when I type in hello-world/path-variable/Ranga, this Ranga over here would be
+	 * mapped by Spring MVC to the PathVariable and we are picking the value up and returning it back in
+	 * 'return new HelloWorldBean(String.format("Hello World, %s", name))'. Path parameters are nothing 
+	 * but the variable values in your URLs. */
 	@GetMapping(path = "/hello-world/path-variable/{name}")
 	public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
 		return new HelloWorldBean(String.format("Hello World, %s", name)); 
@@ -47,6 +50,6 @@ public class HelloWorldController {
 	public String helloWorldInternationalized() {
 		/* Locale helps us to get locale from the request header. */
 		Locale locale = LocaleContextHolder.getLocale();
-		return messageSource.getMessage("good.morning.message", null, "Default Message", locale );
+		return messageSource.getMessage("good.morning.message", null, "Default Message", locale);
 	}
 }

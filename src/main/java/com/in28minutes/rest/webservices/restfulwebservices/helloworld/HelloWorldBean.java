@@ -4,6 +4,7 @@ public class HelloWorldBean {
 
 	private String message;
 
+	// Constructor
 	public HelloWorldBean(String message) {
 		this.setMessage(message);
 	}
