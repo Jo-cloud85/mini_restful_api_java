@@ -22,8 +22,12 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	/* This is for 404 RESOURCE NOT FOUND */
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<ErrorDetails> handleAllExceptions(Exception ex, WebRequest request) throws Exception {
+
 		ErrorDetails errorDetails = 
-				new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+				new ErrorDetails(
+					LocalDateTime.now(), 
+					ex.getMessage(), 
+					request.getDescription(false));
 		
 		return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -31,6 +35,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 	/* This is for 400 BAD REQUEST */
 	@ExceptionHandler(UserNotFoundException.class)
 	public final ResponseEntity<ErrorDetails> handleUserNotFoundException(Exception ex, WebRequest request) throws Exception {
+
 		ErrorDetails errorDetails = 
 				new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
 		
@@ -44,11 +49,10 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 		/* You can customize the error message that you want to return. */
 		ErrorDetails errorDetails = 
 				new ErrorDetails(
-						LocalDateTime.now(), 
-						"Total Errors: " + ex.getErrorCount() + ". First Error: " + ex.getFieldError().getDefaultMessage(),
-						request.getDescription(false)
-						);
+					LocalDateTime.now(), 
+					"Total Errors: " + ex.getErrorCount() + ". First Error: " + ex.getFieldError().getDefaultMessage(),
+					request.getDescription(false));
 		
-		return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
 }
